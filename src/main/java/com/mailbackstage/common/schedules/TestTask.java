@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class TestTask {
 
     @Scheduled(cron = "0 * * ? * ?")
     private void test() {
-        System.out.println(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+        System.out.println("当前时间：" + format.format(new Date()));
     }
 }

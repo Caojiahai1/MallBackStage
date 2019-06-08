@@ -19,12 +19,12 @@ import java.util.List;
  */
 @Api(tags = "PmsBrandController", description = "商品品牌管理")
 @RestController
-@RequestMapping("PmsBrand")
+@RequestMapping("/PmsBrand")
 public class PmsBrandController {
     @Autowired
     private PmsBrandService pmsBrandService;
 
-    @GetMapping(value = "getList")
+    @GetMapping(value = "/getList")
     @ApiOperation("获取商品品牌列表")
     public List<PmsBrand> getList() {
         return pmsBrandService.getList(new PmsBrandExample());

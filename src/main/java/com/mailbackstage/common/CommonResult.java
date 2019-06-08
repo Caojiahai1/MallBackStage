@@ -3,6 +3,7 @@ package com.mailbackstage.common;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Yan liang
@@ -12,17 +13,38 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class CommonResult {
+@ToString
+public class CommonResult<T> {
     public CommonResult() {
-        this.Success = true;
+        this.success = true;
+        this.code = ResultCode.SUCCESS.getCode();
     }
 
     public CommonResult success(boolean success, String message) {
-        this.Success = success;
-        this.Message = message;
+        this.success = success;
+        this.message = message;
+        this.code = success ? ResultCode.SUCCESS.getCode() : ResultCode.FAILED.getCode();
         return this;
     }
 
-    private boolean Success;
-    private String Message;
+    public CommonResult<T> success(boolean success, String message, T data) {
+        this.success = success;
+        this.message = message;
+        this.code = success ? ResultCode.SUCCESS.getCode() : ResultCode.FAILED.getCode();
+        this.data = data;
+        return this;
+    }
+
+    public CommonResult<T> forbidden(T data) {
+        this.code = ResultCode.FORBIDDEN.getCode();
+        this.success = false;
+        this.message = ResultCode.FORBIDDEN.getMessage();
+        this.data = data;
+        return this;
+    }
+
+    private boolean success;
+    private String message;
+    private long code;
+    private T data;
 }

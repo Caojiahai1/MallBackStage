@@ -19,7 +19,7 @@ public class TestTask {
 
     @Scheduled(cron = "0 * * ? * ?")
     private void test() {
-        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("当前时间：" + format.format(new Date()));
     }
 }

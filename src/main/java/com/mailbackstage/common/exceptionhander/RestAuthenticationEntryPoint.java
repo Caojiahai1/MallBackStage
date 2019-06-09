@@ -1,6 +1,6 @@
 package com.mailbackstage.common.exceptionhander;
 
-import com.alibaba.druid.support.json.JSONUtils;
+import cn.hutool.json.JSONUtil;
 import com.mailbackstage.common.CommonResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -25,7 +25,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint{
                          AuthenticationException e) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println(JSONUtils.parse(new CommonResult<String>().forbidden("").toString()));
+        response.getWriter().println(JSONUtil.parse(new CommonResult<String>().forbidden("")));
         response.getWriter().flush();
     }
 }

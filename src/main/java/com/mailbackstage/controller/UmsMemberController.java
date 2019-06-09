@@ -5,6 +5,7 @@ import com.mailbackstage.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,12 +23,14 @@ public class UmsMemberController {
 
     @ApiOperation("获取验证码")
     @GetMapping("/getAuthCode/{telephone}")
+    @PreAuthorize("hasAnyAuthority('ums:member:read')")
     public CommonResult getAuthCode(@PathVariable("telephone") String telephone) {
         return umsMemberService.getAuthCode(telephone);
     }
 
     @ApiOperation("判断验证码是否正确")
     @PostMapping("/verifyAuthCode/{telephone}/{authCode}")
+    @PreAuthorize("hasAnyAuthority('ums:member:read')")
     public CommonResult verifyAuthCode(@PathVariable("telephone") String telephone,
                                         @PathVariable("authCode") String authCode) {
         return umsMemberService.verifyAuthCode(telephone, authCode);
